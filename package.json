@@ -6,5 +6,5 @@
   "scripts": {
     "prepare": "husky"
   },
-  "workspaces": ["front"]
+  "workspaces": ["front", "back"]
 }
