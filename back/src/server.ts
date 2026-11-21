@@ -1,9 +1,6 @@
-import express, { Request, Response} from "express"
+import app from "./app.ts";
+import { config } from "./core/config.ts"
 
-const app = express();
-
-app.get("/", (req: Request, res: Response) => {
-    res.send("Server is running just fine!")
-})
-
-export default app;
+app.listen(config.port, () => {
+    console.log(`Server is running on port ${config.port}`);
+});
