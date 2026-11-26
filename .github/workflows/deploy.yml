@@ -1,0 +1,39 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+      name: 🔍 Configuration validation
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Check out source code
+          uses: actions/checkout@v4
+
+        - name: Validate Docker Compose syntax
+          run: docker compose config -q
+
+        # TODO: Run linter and test
+
+
+  deploy:
+      name: 🚀 Deployment to EC2 server
+      needs: validate
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: SSH connection & Docker update
+          uses: appleboy/ssh-action@v1.0.3
+          with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USER }}
+            key: ${{ secrets.EC2_SSH_KEY }}
+            script: |
+              set -e
+              cd ~/Bike-Configurator
+              git pull --ff-only origin main
+              docker compose up -d --build --remove-orphans
+              docker image prune -f
