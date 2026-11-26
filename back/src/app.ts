@@ -1,8 +1,11 @@
 import express from 'express';
+import logger from './middleware/logger.js';
 
 const app = express();
 
 // Middlewares
+
+app.use(logger);
 
 // Routes
 

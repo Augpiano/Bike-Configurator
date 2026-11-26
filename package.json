@@ -1,23 +1,12 @@
 {
   "devDependencies": {
-    "husky": "^9.1.7",
-    "vite": "^8.3.8"
+    "husky": "^9.1.7"
   },
   "scripts": {
-    "prepare": "husky",
-    "dev:frontend": "cd front && npm run dev",
-    "dev:backend": "cd back && npm run dev",
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "build:frontend": "cd front && npm run build",
-    "build:backend": "cd back && npm run build",
-    "build": "concurrently \"npm run build:frontend\" \"npm run build:backend\"",
-    "start": "cd back && npm run start"
+    "prepare": "husky"
   },
   "workspaces": [
     "front",
     "back"
-  ],
-  "dependencies": {
-    "concurrently": "^10.0.7"
-  }
+  ]
 }
